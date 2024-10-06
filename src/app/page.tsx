@@ -91,7 +91,7 @@ export default function FreelanceApp() {
                   </div>
                 </div>
                 <p className="text-muted-foreground">
-                  We're looking for an experienced React developer to join our team and work on exciting projects...
+                  We&apos;re looking for an experienced React developer to join our team and work on exciting projects...
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Button variant="secondary" size="sm">React</Button>
