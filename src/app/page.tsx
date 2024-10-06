@@ -1,112 +1,100 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
-import { BriefcaseIcon, MenuIcon } from "lucide-react"
+import React from 'react';
+import { Search, User, Bell, MessageSquare } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
-export default function FreelanceApp() {
+const names = ["Alice Smith", "Bob Johnson", "Charlie Brown", "Diana Lee", "Ethan Davis", "Fiona Wilson", "George Taylor", "Hannah Moore"];
+const prices = [25, 30, 40, 50, 60, 75, 80, 100];
+
+const getRandomElement = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+
+const SkillHubComponent: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="sticky top-0 z-10 bg-background border-b">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <BriefcaseIcon className="h-8 w-8 text-primary" />
-            <h1 className="text-2xl font-bold">AdamaneHub</h1>
-          </div>
+      <header className="flex items-center justify-between px-6 py-4 border-b">
+        <div className="flex items-center space-x-4">
+          <h1 className="text-2xl font-bold text-blue-500">SkillHub</h1>
           <nav className="hidden md:flex space-x-4">
-            <Button variant="ghost">Find Work</Button>
-            <Button variant="ghost">My Jobs</Button>
-            <Button variant="ghost">Messages</Button>
-            <Button variant="ghost">Profile</Button>
+            <a href="#" className="text-sm font-medium hover:text-blue-500">
+              Business solutions
+            </a>
+            <a href="#" className="text-sm font-medium hover:text-blue-500">
+              Explore
+            </a>
+            <a href="#" className="text-sm font-medium hover:text-blue-500">
+              Become a Seller
+            </a>
           </nav>
-          <Button variant="outline" size="icon" className="md:hidden">
-            <MenuIcon className="h-6 w-6" />
+        </div>
+        <div className="flex items-center space-x-4">
+          <Button variant="ghost" size="icon">
+            <Bell className="h-5 w-5" />
+          </Button>
+          <Button variant="ghost" size="icon">
+            <MessageSquare className="h-5 w-5" />
+          </Button>
+          <Button variant="ghost" size="icon">
+            <User className="h-5 w-5" />
           </Button>
         </div>
       </header>
-      <main className="flex-grow container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row gap-8">
-          <aside className="w-full md:w-64 space-y-6">
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Filters</h2>
-              <Input type="text" placeholder="Search jobs..." />
+      <main className="flex-1 p-6">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <div className="text-center space-y-2">
+            <h2 className="text-3xl font-bold">Find the perfect freelance services for your business</h2>
+            <div className="flex items-center max-w-md mx-auto">
+              <Input className="rounded-r-none" placeholder="Search for any service..." />
+              <Button className="rounded-l-none" type="submit">
+                <Search className="h-4 w-4 mr-2" />
+                Search
+              </Button>
             </div>
-            <div>
-              <h3 className="font-medium mb-2">Category</h3>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select category" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="web-dev">Web Development</SelectItem>
-                  <SelectItem value="design">Design</SelectItem>
-                  <SelectItem value="writing">Writing</SelectItem>
-                  <SelectItem value="marketing">Marketing</SelectItem>
-                </SelectContent>
-              </Select>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Popular Categories</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {["Graphics & Design", "Digital Marketing", "Writing & Translation", "Video & Animation", "Music & Audio", "Programming & Tech", "Business", "Lifestyle"].map((category) => (
+                <Button key={category} variant="outline" className="h-auto py-4 justify-start">
+                  {category}
+                </Button>
+              ))}
             </div>
-            <div>
-              <h3 className="font-medium mb-2">Experience Level</h3>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select level" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="entry">Entry</SelectItem>
-                  <SelectItem value="intermediate">Intermediate</SelectItem>
-                  <SelectItem value="expert">Expert</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <h3 className="font-medium mb-2">Hourly Rate</h3>
-              <Slider defaultValue={[50]} max={100} step={1} />
-              <div className="text-sm text-muted-foreground mt-1">$50/hour</div>
-            </div>
-          </aside>
-          <section className="flex-grow space-y-6">
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold">Featured Jobs</h2>
-              <Select defaultValue="newest">
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Sort by" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="newest">Newest</SelectItem>
-                  <SelectItem value="highest-paid">Highest Paid</SelectItem>
-                  <SelectItem value="most-relevant">Most Relevant</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            {[1, 2, 3].map((job) => (
-              <div key={job} className="border rounded-lg p-6 space-y-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-xl font-semibold">Senior React Developer</h3>
-                    <p className="text-muted-foreground">XYZ Tech Solutions</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-medium">$50-$70/hour</div>
-                    <div className="text-sm text-muted-foreground">Posted 2 days ago</div>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold mb-4">Recently Viewed Gigs</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((gig) => (
+                <div key={gig} className="border rounded-lg overflow-hidden">
+                  <img
+                    alt="Gig thumbnail"
+                    className="object-cover w-full h-48"
+                    height="200"
+                    src={`https://source.unsplash.com/random/300x200?sig=${gig}`}
+                    style={{
+                      aspectRatio: "300/200",
+                      objectFit: "cover",
+                    }}
+                    width="300"
+                  />
+                  <div className="p-4">
+                    <h4 className="font-semibold mb-2">I will do something awesome for you</h4>
+                    <div className="flex items-center text-sm text-gray-500 mb-2">
+                      <User className="h-4 w-4 mr-1" />
+                      <span>{getRandomElement(names)}</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm">Starting at</div>
+                      <div className="font-semibold">${getRandomElement(prices)}</div>
+                    </div>
                   </div>
                 </div>
-                <p className="text-muted-foreground">
-                  We&apos;re looking for an experienced React developer to join our team and work on exciting projects...
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Button variant="secondary" size="sm">React</Button>
-                  <Button variant="secondary" size="sm">TypeScript</Button>
-                  <Button variant="secondary" size="sm">Node.js</Button>
-                </div>
-                <div className="flex justify-between items-center">
-                  <div className="text-sm text-muted-foreground">30-40 hours/week</div>
-                  <Button>Apply Now</Button>
-                </div>
-              </div>
-            ))}
-          </section>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
+
+export default SkillHubComponent;
