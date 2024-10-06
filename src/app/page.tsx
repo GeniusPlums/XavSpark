@@ -1,101 +1,112 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Slider } from "@/components/ui/slider"
+import { BriefcaseIcon, MenuIcon } from "lucide-react"
 
-export default function Home() {
+export default function FreelanceApp() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col min-h-screen">
+      <header className="sticky top-0 z-10 bg-background border-b">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <BriefcaseIcon className="h-8 w-8 text-primary" />
+            <h1 className="text-2xl font-bold">AdamaneHub</h1>
+          </div>
+          <nav className="hidden md:flex space-x-4">
+            <Button variant="ghost">Find Work</Button>
+            <Button variant="ghost">My Jobs</Button>
+            <Button variant="ghost">Messages</Button>
+            <Button variant="ghost">Profile</Button>
+          </nav>
+          <Button variant="outline" size="icon" className="md:hidden">
+            <MenuIcon className="h-6 w-6" />
+          </Button>
+        </div>
+      </header>
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          <aside className="w-full md:w-64 space-y-6">
+            <div>
+              <h2 className="text-lg font-semibold mb-2">Filters</h2>
+              <Input type="text" placeholder="Search jobs..." />
+            </div>
+            <div>
+              <h3 className="font-medium mb-2">Category</h3>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="web-dev">Web Development</SelectItem>
+                  <SelectItem value="design">Design</SelectItem>
+                  <SelectItem value="writing">Writing</SelectItem>
+                  <SelectItem value="marketing">Marketing</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <h3 className="font-medium mb-2">Experience Level</h3>
+              <Select>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select level" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="entry">Entry</SelectItem>
+                  <SelectItem value="intermediate">Intermediate</SelectItem>
+                  <SelectItem value="expert">Expert</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <h3 className="font-medium mb-2">Hourly Rate</h3>
+              <Slider defaultValue={[50]} max={100} step={1} />
+              <div className="text-sm text-muted-foreground mt-1">$50/hour</div>
+            </div>
+          </aside>
+          <section className="flex-grow space-y-6">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold">Featured Jobs</h2>
+              <Select defaultValue="newest">
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="newest">Newest</SelectItem>
+                  <SelectItem value="highest-paid">Highest Paid</SelectItem>
+                  <SelectItem value="most-relevant">Most Relevant</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            {[1, 2, 3].map((job) => (
+              <div key={job} className="border rounded-lg p-6 space-y-4">
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="text-xl font-semibold">Senior React Developer</h3>
+                    <p className="text-muted-foreground">XYZ Tech Solutions</p>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-medium">$50-$70/hour</div>
+                    <div className="text-sm text-muted-foreground">Posted 2 days ago</div>
+                  </div>
+                </div>
+                <p className="text-muted-foreground">
+                  We're looking for an experienced React developer to join our team and work on exciting projects...
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Button variant="secondary" size="sm">React</Button>
+                  <Button variant="secondary" size="sm">TypeScript</Button>
+                  <Button variant="secondary" size="sm">Node.js</Button>
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="text-sm text-muted-foreground">30-40 hours/week</div>
+                  <Button>Apply Now</Button>
+                </div>
+              </div>
+            ))}
+          </section>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
