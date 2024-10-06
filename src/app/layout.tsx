@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "AdamaneHub",
-  description: "Created by Anish Adamane",
+  title: "SkillHub",
+  description: "Created by whoever did this",
 };
 
 export default function RootLayout({

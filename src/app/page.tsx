@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 const names = ["Alice Smith", "Bob Johnson", "Charlie Brown", "Diana Lee", "Ethan Davis", "Fiona Wilson", "George Taylor", "Hannah Moore"];
 const prices = [25, 30, 40, 50, 60, 75, 80, 100];
 
-const getRandomElement = (arr: any[]) => arr[Math.floor(Math.random() * arr.length)];
+const getRandomElement = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
 const SkillHubComponent: React.FC = () => {
   return (
